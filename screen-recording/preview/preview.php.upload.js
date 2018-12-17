@@ -1,4 +1,4 @@
-var server_url = 'https://webrtcweb.com/f/';
+var server_url = 'http://school.lvh.me:3000/api/tenant_admin/v1/videos/upload_and_create';
 
 document.querySelector('#btn-php-upload').onclick = function() {
     if (!file) {
@@ -52,12 +52,15 @@ function uploadToPHPServer(blob, callback) {
     var formData = new FormData();
 
     var fName = blob.name;
+    // var fSize = blob.size;
+    // var fType = blob.type;
 
-    formData.append('video-filename', fName);
-    formData.append('video-blob', blob);
+    // formData.append('video[video_file_name]', fName);
+    // formData.append('video[video_file_size]', fSize);
+    // formData.append('video[video_content_type]', fType);
+    formData.append('video[video_file_body]', blob);
 
     callback('Uploading recorded-file to server.');
-
     makeXMLHttpRequest(server_url, formData, function(progress) {
         if (progress === 'upload-faild') {
             return;
@@ -87,6 +90,7 @@ function deleteFromPHPServer(fName, callback) {
 
 function makeXMLHttpRequest(url, data, callback) {
     var request = new XMLHttpRequest();
+    XPathResult.withCredentials = true;
     request.onreadystatechange = function() {
         if (request.readyState == 4 && request.status == 200) {
             if (request.responseText && request.responseText.toString().indexOf('<h2>Upload failed.</h2>') === 0) {
