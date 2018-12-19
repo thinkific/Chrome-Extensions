@@ -19,7 +19,7 @@ function captureDesktop() {
     }
 
     chrome.browserAction.setIcon({
-        path: 'images/main-icon.png'
+        path: 'images/thinkific-icon.png'
     });
 
     if (enableTabCaptureAPI) {

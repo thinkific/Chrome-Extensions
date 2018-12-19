@@ -3,7 +3,7 @@ chrome.storage.sync.set({
 });
 
 chrome.browserAction.setIcon({
-    path: 'images/main-icon.png'
+    path: 'images/thinkific-icon.png'
 });
 
 function gotStream(stream) {
@@ -59,12 +59,12 @@ function gotStream(stream) {
 
     if (cameraStream) {
         var ignoreSecondPart = false;
-        
+
         if(enableSpeakers && enableMicrophone) {
             var mixAudioStream = getMixedAudioStream([cameraStream, stream]);
             if(mixAudioStream && mixAudioStream.getAudioTracks().length) {
                 ignoreSecondPart = true;
-                
+
                 var mixedTrack = mixAudioStream.getAudioTracks()[0];
                 stream.addTrack(mixedTrack);
                 stream.getAudioTracks().forEach(function(track) {
@@ -94,7 +94,7 @@ function gotStream(stream) {
         // adjust video on top over screen
 
         // on faster systems (i.e. 4MB or higher RAM):
-        // screen: 3840x2160 
+        // screen: 3840x2160
         // camera: 1280x720
         stream.width = screen.width;
         stream.height = screen.height;
@@ -145,7 +145,7 @@ function stopScreenRecording() {
         title: 'Record Your Screen, Tab or Camera'
     });
     chrome.browserAction.setIcon({
-        path: 'images/main-icon.png'
+        path: 'images/thinkific-icon.png'
     });
 
     recorder.stop(function() {
@@ -228,7 +228,7 @@ function stopScreenRecording() {
             isRecording = false;
             setBadgeText('');
             chrome.browserAction.setIcon({
-                path: 'images/main-icon.png'
+                path: 'images/thinkific-icon.png'
             });
             // -------------
 
@@ -266,7 +266,7 @@ function stopScreenRecording() {
 
 function setDefaults() {
     chrome.browserAction.setIcon({
-        path: 'images/main-icon.png'
+        path: 'images/thinkific-icon.png'
     });
 
     if (recorder && recorder.streams) {
@@ -373,7 +373,7 @@ function getUserConfigs() {
 
 false && chrome.storage.sync.get('openPreviewPage', function(item) {
     if (item.openPreviewPage !== 'true') return;
-    
+
     chrome.storage.sync.set({
         isRecording: 'false',
         openPreviewPage: 'false'

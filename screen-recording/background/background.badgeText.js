@@ -77,7 +77,7 @@ var reverse = false;
 
 function onRecording() {
     if(!isRecording) return;
-    
+
     chrome.browserAction.setIcon({
         path: 'images/' + images[imgIndex]
     });
@@ -104,6 +104,6 @@ function onRecording() {
     }
 
     chrome.browserAction.setIcon({
-        path: 'images/main-icon.png'
+        path: 'images/thinkific-icon.png'
     });
 }

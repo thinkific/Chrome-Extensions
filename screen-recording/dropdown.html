@@ -1,159 +1,71 @@
-﻿ <!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
-<head>
-<style>
-* {
-  -webkit-user-select: none;
-  -user-select: none;
-  -webkit-user-drag: none;
-  -user-drag: none;
-}
+  <head>
+    <link rel="stylesheet" href="https://cdn.thinkific.com/9/20181218/b29648a986d5d040b7dbb39f629e3778.css" />
+    <link rel="stylesheet" href="https://toga.thinkific.design/toga-icons.css" />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"> -->
+    <link rel="stylesheet" href="styles.css">
+    <title>Thinkific Screen Recorder</title>
+  </head>
+  <body>
+    <div id="default-section">
+      <header></header>
 
-@font-face {
-  font-family: 'Custom_Font';
-  src: local('.SFNSText-Light'), 
-       local('.HelveticaNeueDeskInterface-Light'), 
-       local('.LucidaGrandeUI'), 
-       local('Ubuntu Light'), 
-       local('Segoe UI Light'),
-       local('Roboto-Light'), 
-       local('DroidSans'), 
-       local('Tahoma');
-}
+      <main>
+        <div class="form-row">
+          <div class="form-group col-12">
+            <label class="label" for="type">Video Recording</label>
+            <select id="recording-type" class="form-control">
+              <option disabled selected value>Choose Recording Type</option>
+              <option value="0">Screen</option>
+              <option value="1">Camera</option>
+              <option value="2">Screen + Camera</option>
+            </select>
+          </div>
 
-* {
-  margin: 0;
-  padding: 0;
-}
+          <div id="camera-select-container" class="form-group col-12 is-hidden">
+            <label class="label" for="type">Camera Device</label>
+            <select id="camera-devices" class="form-control"></select>
+          </div>
 
-html, body {
-  width: 350px;
-  background-color: #F3F3F3;
-  font-family: Custom_Font!important;
-  font-size: 1em;
-  overflow: hidden;
-}
+          <div id="microphone-select-container" class="form-group col-12 is-hidden">
+            <label class="label" for="type">Microphone Device</label>
+            <select id="microphone-devices" class="form-control"></select>
+          </div>
 
-hr {
-  border: 0;
-  border-top: solid lightgray 1px;
-}
+          <label class="label d-block" for="type">Audio Recording</label>
+          <div class="form-group col-12">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="mic-toggle">
+              <label class="custom-control-label" for="mic-toggle">From mic</label>
+            </div>
 
-div {
-  padding: 4px 8px;
-}
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="speaker-toggle">
+              <label class="custom-control-label" for="speaker-toggle">From speakers</label>
+            </div>
+          </div>
+        </div>
 
-div.btn {
-  text-decoration: none;
-  outline: none;
-  border: 0;
-  font-size: inherit;
-  cursor: pointer;
-}
+        <button id="button-start-recording" class="button button--secondary-dark w-100">Start Recording</button>
+      </main>
 
-div.btn:hover {
-  color: #ffffff;
-  background: #3cb0fd;
-  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
-  text-decoration: none;
-}
+      <footer class="text-center">
+        <a href="http://www.thinkific.com" class="button button--link" target="_blank">
+          Go To Thinkific Site
+          <i class="toga-icon toga-icon-arrow-up-right"></i>
+        </a>
+      </footer>
+    </div>
 
-a {
-  outline: none;
-  text-decoration: none;
-  color: #0C97BB;
-}
+    <div id="stop-section">
+      <div class="button button--primary" id="stop-recording">
+        <img src="images/recordRTC-progress-1.png" />
+        Stop Recording
+      </div>
+    </div>
 
-div.btn img {
-  height: 32px;
-}
-
-section {
-  margin-right: 15px;
-  text-align: right;
-  width: 24px;
-  display: inline-block;
-  vertical-align: middle;
-}
-</style>
-<title>RecordRTC Extension</title>
-</head>
-<body>
-    <article id="default-section">
-      <div class="btn" id="full-screen">
-          <section><img src="images/main-icon.png"></section>
-          Screen Only (without audio)
-      </div>
-      <hr>
-      <div class="btn" id="microphone-screen">
-          <section><img src="images/main-icon.png"></section>
-          Screen + Microphone
-      </div>
-      <hr>
-      <div class="btn" id="full-screen-audio">
-          <section><img src="images/main-icon.png"></section>
-          Screen + Speakers
-      </div>
-      <hr>
-      <div class="btn" id="full-screen-microphone-audio">
-          <section><img src="images/main-icon.png"></section>
-          Screen + Microphone + Speakers
-      </div>
-      <hr>
-      <div class="btn" id="selected-tab">
-          <section><img src="images/main-icon.png"></section>
-          Chrome Tab
-      </div>
-      <hr>
-      <div class="btn" id="selected-tab-audio-only">
-          <section><img src="images/main-icon.png"></section>
-          Chrome Tab (Audio Only)
-      </div>
-      <hr>
-      <div class="btn" id="microphone-screen-camera">
-          <section><img src="images/main-icon.png"></section>
-          Full Screen + Camera
-      </div>
-      <hr>
-      <div class="btn" id="microphone-webcam">
-          <section><img src="images/main-icon.png"></section>
-           Microphone + Camera
-      </div>
-      <hr>
-      <div class="btn" id="microphone-speakers">
-          <section><img src="images/main-icon.png"></section>
-           Microphone + Speakers
-      </div>
-      <hr>
-      <div class="btn" id="microphone-only">
-          <section><img src="images/main-icon.png"></section>
-           Microphone Only
-      </div>
-      <hr>
-      <div class="btn" id="speakers-only">
-          <section><img src="images/main-icon.png"></section>
-           Speakers Only
-      </div>
-      <hr>
-      <div style="float: right;">
-        <a href="preview.html" target="_blank">See All Recordings</a>
-      </div>
-      <div>
-        <a id="btn-options" href="options.html" target="_blank">Options</a>
-      </div>
-    </article>
-
-    <article id="stop-section">
-      <div class="btn" id="stop-recording">
-          <section><img src="images/recordRTC-progress-1.png"></section>
-          Stop Recording
-      </div>
-    </article>
-
+    <script src="RecordRTC/getAllAudioVideoDevices.js"></script>
     <script src="dropdown.js"></script>
-</body>
+  </body>
 </html>
