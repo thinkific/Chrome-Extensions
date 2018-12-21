@@ -1,6 +1,6 @@
 var server_url = 'http://school.lvh.me:3000/api/tenant_admin/v1/videos/upload_and_create';
 
-document.querySelector('#btn-php-upload').onclick = function() {
+document.querySelector('#btn-upload').onclick = function() {
     if (!file) {
         fname.innerHTML = 'You did NOT record anything yet.';
         return;
@@ -8,11 +8,11 @@ document.querySelector('#btn-php-upload').onclick = function() {
 
     this.disabled = true;
 
-    fresolutions.innerHTML = fsize.innerHTML = fduration.innerHTML = browserCache.innerHTML = '';
-    fname.innerHTML = 'Upload started...';
+    // fresolutions.innerHTML = fsize.innerHTML = fduration.innerHTML = browserCache.innerHTML = '';
+    // fname.innerHTML = 'Upload started...';
 
     uploadToPHPServer(file, function(progress, videoURL) {
-        browserCache.innerHTML = '';
+        // browserCache.innerHTML = '';
 
         if (progress === 'ended' || videoURL) {
             showPHPURL(videoURL);
@@ -20,19 +20,19 @@ document.querySelector('#btn-php-upload').onclick = function() {
             return;
         }
 
-        if (progress != 'Upload started...') {
-            fname.innerHTML = 'Upload Progress: ' + progress + '%';
-            browserCache.innerHTML = '<progress min=0 max=100 value=' + progress + ' style="margin-top: 10px;"></progress>';
-        } else {
-            fname.innerHTML = progress;
-        }
+        // if (progress != 'Upload started...') {
+        //     fname.innerHTML = 'Upload Progress: ' + progress + '%';
+        //     browserCache.innerHTML = '<progress min=0 max=100 value=' + progress + ' style="margin-top: 10px;"></progress>';
+        // } else {
+        //     fname.innerHTML = progress;
+        // }
 
         document.title = progress + '% uploaded';
 
-        if (progress >= 99 || videoURL || progress === 'progress-ended') {
-            browserCache.innerHTML = '';
-            fname.innerHTML = 'Uploaded to Server. Retrieving the private video URL...';
-        }
+        // if (progress >= 99 || videoURL || progress === 'progress-ended') {
+        //     browserCache.innerHTML = '';
+        //     fname.innerHTML = 'Uploaded to Server. Retrieving the private video URL...';
+        // }
     });
 };
 

@@ -1,0 +1,254 @@
+body {
+  overflow: hidden;
+  font-family: Barlow;
+}
+
+header {
+  background-image: url('images/thinkific-white.svg');
+  background-color: #26254d;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 10%;
+  width: 100%;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header button,
+header a,
+header i {
+  font-size: 14px;
+  color: #caccd6 !important;
+  letter-spacing: 0.3px;
+  line-height: 1.29;
+  font-weight: 600;
+}
+
+.header__button--left,
+.header__button--right {
+  height: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.header__button--left {
+  border-right: 1px solid #57608c;
+}
+
+.header__button--right {
+  justify-content: space-between;
+}
+
+.vertical-separator {
+  height: 100%;
+  border-left: 1px solid #57608c;
+}
+
+main {
+  background-color: #57608c;
+  height: 100%;
+}
+
+.video__container {
+  width: 70%;
+  margin: 0 auto;
+  padding-bottom: 60px;
+  text-align: center;
+}
+
+.file-info__container {
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 34px 0 16px;
+}
+
+#file-name {
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  line-height: 1.5;
+}
+
+#file-duration {
+  color: #ffde87;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  line-height: 1.5;
+}
+
+video {
+  width: 100%;
+  height: auto;
+}
+
+.play-bar__container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 48px;
+  background-color: #26254d;
+}
+
+.toga-icon-circle-outline-play {
+  color: #fff;
+  font-size: 40px !important;
+}
+
+.play-bar__controls--right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 48px;
+  display: flex;
+  align-items: center;
+}
+
+.toga-icon-speaker {
+  color: #fff;
+  font-size: 32px !important;
+}
+
+.toga-icon-arrow-grow {
+  color: #fff;
+  font-size: 24px !important;
+}
+
+.fa-pause-circle {
+  color: #fff;
+  font-size: 27px !important;
+}
+
+html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
+  right: -8px;
+}
+
+.noUi-target {
+  background: #3d47a3;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.noUi-connect {
+  background: #ffde87;
+}
+
+.noUi-handle {
+  background: #caccd6;
+  border: none;
+  box-shadow: none;
+}
+
+#seek-bar.noUi-horizontal {
+  height: 24px;
+  margin: 0 auto;
+}
+
+#seek-bar.noUi-horizontal .noUi-handle {
+  width: 16px;
+  height: 24px;
+  top: 0;
+}
+
+#seek-bar .noUi-handle:before,
+#seek-bar .noUi-handle:after {
+  height: 12px;
+  width: 2px;
+  background: #eceffb;
+  left: 5px;
+}
+
+#seek-bar .noUi-handle:after {
+  left: 9px;
+}
+
+#seeker.noUi-target {
+  background: transparent !important;
+}
+
+#seeker {
+  top: 6px;
+}
+
+#seeker.noUi-horizontal .noUi-handle {
+  width: 16px;
+  height: 16px;
+  background: #ff7e40;
+}
+
+#seeker .noUi-handle:before {
+  background: transparent;
+  width: 2px;
+  height: 24px;
+  background: #ff7e40;
+  top: -24px;
+  left: 7px;
+}
+
+#seeker .noUi-handle:after {
+  height: 8px;
+  width: 5px;
+  background: transparent;
+  border-left: 1px solid #eceffb;
+  border-right: 1px solid #eceffb;
+  left: 5px;
+  top: 4px;
+}
+
+#volume-gauge {
+  position: absolute;
+  left: -55px;
+  width: 50px;
+  height: 15px;
+}
+
+#volume-gauge.noUi-horizontal .noUi-handle {
+  width: 12px;
+  height: 15px;
+  top: 0;
+}
+
+#volume-gauge.noUi-horizontal .noUi-handle:before,
+#volume-gauge.noUi-horizontal .noUi-handle:after {
+  height: 8px;
+  width: 2px;
+  background: #eceffb;
+  left: 5px;
+  top: 4px;
+}
+
+input[type=range] {
+  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+  width: 100%; /* Specific width is required for Firefox. */
+  background: transparent; /* Otherwise white in Chrome */
+}
+
+input[type=range]:focus {
+  outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+}
+
+/* Special styling for WebKit/Blink */
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 2px;
+  background: #ff7e40;
+  cursor: pointer;
+  margin-top: 0px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+}
+
+input[type=range]::-webkit-slider-thumb:before {
+  content: "";
+  width: 1px;
+  height: 15px;
+  background: #ff7e40;
+  position: absolute;
+  top: 0;
+}
