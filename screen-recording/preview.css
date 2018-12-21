@@ -153,8 +153,24 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   box-shadow: none;
 }
 
+.seek-bar__container {
+  position: relative;
+}
+
 #seek-bar {
   width: 816px;
+}
+
+#seek-bar.noUi-target {
+  background: transparent;
+}
+
+#seek-bar-with-background {
+  position: absolute;
+  width: 800px;
+  height: 24px;
+  background: #3d47a3;
+  margin: 0 auto;
 }
 
 #seek-bar.noUi-horizontal {
@@ -167,6 +183,18 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   height: 24px;
   top: 0;
   right: -4px;
+}
+
+#seek-bar.noUi-horizontal .noUi-handle-lower {
+  border-radius: 0;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+#seek-bar.noUi-horizontal .noUi-handle-upper {
+  border-radius: 0;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
 }
 
 #seek-bar .noUi-handle:before,
