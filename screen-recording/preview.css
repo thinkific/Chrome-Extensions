@@ -52,14 +52,16 @@ main {
 }
 
 .video__container {
-  width: 70%;
+  width: 800px;
+  height: 450px;
   margin: 0 auto;
   padding-bottom: 60px;
   text-align: center;
+  max-height: 700px;
 }
 
 .file-info__container {
-  width: 70%;
+  width: 800px;
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
