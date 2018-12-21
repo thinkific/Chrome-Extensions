@@ -1,0 +1,51 @@
+body {
+  font-family: Barlow;
+  background-color: #F2F3F5;
+}
+
+header {
+  background-image: url('images/thinkific-white.svg');
+  background-color: #26254d;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 10%;
+  width: 100%;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header a,
+header i {
+  font-size: 14px;
+  color: #caccd6 !important;
+  letter-spacing: 0.3px;
+  line-height: 1.29;
+  font-weight: 600;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.header__button--left,
+.header__button--right {
+  display: flex;
+  align-items: center;
+  height: 30px;
+}
+
+.header__button--right {
+  border-left: 1px solid #57608c;
+}
+
+main {
+  width: 80%;
+  margin: 0 auto;
+  padding-top: 50px;
+}
+
+h2 {
+  margin-bottom: 16x;
+}

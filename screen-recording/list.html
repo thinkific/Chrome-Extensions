@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Barlow:400,600" />
+    <link rel="stylesheet" href="https://cdn.thinkific.com/9/20181218/b29648a986d5d040b7dbb39f629e3778.css" />
+    <link rel="stylesheet" href="https://toga.thinkific.design/toga-icons.css" />
+    <link rel="stylesheet" href="list.css">
+    <title>Thinkific Screen Recorder</title>
+  </head>
+  <body>
+    <header>
+      <div class="header__button--left">
+        <a href="preview.html" class="button button--utility button--icon-only">
+          <i class="toga-icon toga-icon-arrow-left"></i>
+        </a>
+      </div>
+      <div class="header__button--right">
+        <a href="http://school.lvh.me:3000/manage/videos" class="button button--utility button--icon-right" target="_blank">
+          Go To Video Library
+          <i class="toga-icon toga-icon-caret-stroke-right"></i>
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <h2>My Capture Library</h1>
+      <div class="table-container table-container--section">
+        <div class="table-container__content">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="video-list">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="RecordRTC/DiskStorage.js"></script>
+    <script src="list.js"></script>
+  </body>
+</html>
+
+

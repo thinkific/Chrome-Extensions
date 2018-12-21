@@ -243,7 +243,7 @@ var DiskStorage = {
         if(!newFileName || !newFileName.replace(/ /g, '').length) {
             newFileName = 'unknown.webm';
         }
-        
+
         if(newFileName.split('.').length <= 1) {
             newFileName = newFileName.split('.')[0] + '.webm';
         }

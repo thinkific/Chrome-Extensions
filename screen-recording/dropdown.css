@@ -8,22 +8,16 @@
 }
 
 body {
-  background-color: #100D59;
   width: 340px;
-  overflow: hidden;
   margin: 0;
+  padding-bottom: 16px;
+  background-color: #26254d;
+  font-family: Barlow;
+  overflow: hidden;
 }
 
 label {
-  color: #fff !important;
-}
-
-select {
-  color: #fff !important;
-}
-
-a {
-  color: #fff !important;
+  color: #caccd6 !important;
 }
 
 header {
@@ -36,7 +30,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  border-bottom: 1px solid #CACCD6;
+  border-bottom: 1px solid #57608c;
 }
 
 main {
@@ -44,11 +38,20 @@ main {
 }
 
 #button-start-recording {
-  background-color: #5668C7;
+  background-color: #3d47a3;
+}
+
+.button--link-dark {
+  color: #caccd6 !important;
+}
+
+.form-control {
+  border-color: #caccd6 !important;
+  color: #caccd6 !important;
 }
 
 .button--icon-only i {
-  color: #fff !important;
+  color: #caccd6 !important;
   font-size: 1.25rem !important;
 }
 
@@ -58,11 +61,11 @@ main {
 
 .custom-checkbox .custom-control-input ~ .custom-control-label::before {
   background: transparent;
-  border-color: #fff !important;
+  border-color: #caccd6 !important;
 }
 
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
-  border: 1px solid #fff !important;
+  border: 1px solid #caccd6 !important;
   background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABJklEQVQ4y2MU4I38z0ABYKJE88AYYGunxcDIyEieAalpbgwbN1cz9PYnkm5AYpIzQ2d3PMO/f/8YLl96iN0AXl5OrJpj4xwYunsTGBgYGBgqyxczzJ+3F9OAgEBzhguXJjCYmauiaI6MtmPon5jMwMTExFBVuZhh9qxd2APR08uYQUiYl2HNugoGWzstBgYGBoawcGuGyVNSGZiYmBjqapcxzJi2A8N1zBzsug0MDAwM27edZZCRFWYwMVFhCAg0ZxAQ4Gaoa4hgYGZmZmhqWMEwaeIWrN5jRE6JjIyMDL39iQyJSS4MDAwMDP///2doa1nN0NO9AWfgwl0AAzt3nGfg4+VkMDVTZejsWMfQ3bkeb+ww4soLjk66DPv3XSYYvYxDPzMBAK3wSRMvu83GAAAAAElFTkSuQmCC') !important;
 }
 
