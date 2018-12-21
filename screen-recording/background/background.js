@@ -13,7 +13,7 @@ function gotStream(stream) {
     };
 
     if (!videoCodec) {
-        videoCodec = 'Default'; // prefer VP9 by default
+        videoCodec = 'H264'; // prefer H264 by default
     }
 
     if (videoCodec) {

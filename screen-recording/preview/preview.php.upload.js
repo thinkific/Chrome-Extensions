@@ -14,7 +14,7 @@ document.querySelector('#btn-upload').onclick = function() {
     uploadToPHPServer(file, function(progress, videoURL) {
         // browserCache.innerHTML = '';
 
-        if (progress === 'ended' || videoURL) {
+        if (progress === 'progress-ended' || videoURL) {
             showPHPURL(videoURL);
             document.title = 'Upload successful';
             return;
@@ -55,10 +55,10 @@ function uploadToPHPServer(blob, callback) {
     // var fSize = blob.size;
     // var fType = blob.type;
 
-    // formData.append('video[video_file_name]', fName);
-    // formData.append('video[video_file_size]', fSize);
-    // formData.append('video[video_content_type]', fType);
     formData.append('video[video_file_body]', blob);
+    formData.append('video[video_start_time]', trimStart);
+    formData.append('video[video_duration]', videoDuration);
+    formData.append('video[video_duration_untrimmed]', untrimmedVideoDuration);
 
     callback('Uploading recorded-file to server.');
     makeXMLHttpRequest(server_url, formData, function(progress) {

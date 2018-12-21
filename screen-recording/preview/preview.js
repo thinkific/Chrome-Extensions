@@ -12,7 +12,10 @@ var seekBar = document.getElementById("seek-bar");
 var seeker = document.getElementById("seeker");
 var volumeGauge = document.getElementById("volume-gauge");
 var recentFile = localStorage.getItem('selected-file');
-var videoDuration
+var trimStart = 0;
+var untrimmedVideoDuration;
+var videoDuration;
+var step;
 var file;
 
 function onGettingFile(f, item) {
@@ -48,8 +51,13 @@ function onGettingFile(f, item) {
         setTimeout(hidden.onloadedmetadata, 1000);
         return;
       }
-      videoDuration = hidden.duration;
-      fduration.innerHTML = formatSecondsAsTime(hidden.duration);
+      untrimmedVideoDuration = hidden.duration;
+      seekVideoTo(trimStart); // seek back to beginning
+      setVideoDuration(hidden.duration);
+
+      step = videoDuration / Math.ceil(videoDuration);
+      updateSliderStepAndRange(seeker);
+      updateSliderStepAndRange(seekBar);
       hidden.parentNode.removeChild(hidden);
     };
     hidden.style =
@@ -127,9 +135,9 @@ DiskStorage.GetLastSelectedFile(recentFile, function (file) {
 });
 
 function formatSecondsAsTime(secs) {
-  var hr = Math.floor(secs / 3600);
-  var min = Math.floor((secs - hr * 3600) / 60);
-  var sec = Math.floor(secs - hr * 3600 - min * 60);
+  var hr = Math.round(secs / 3600);
+  var min = Math.round((secs - hr * 3600) / 60);
+  var sec = Math.round(secs - hr * 3600 - min * 60);
 
   if (min < 10) {
     min = "0" + min;
@@ -150,39 +158,63 @@ noUiSlider.create(seekBar, {
   start: [0, 100],
   connect: true,
   range: {
-    'min': 0,
-    'max': 100
+    min: 0,
+    max: 100
   }
 });
 
 noUiSlider.create(seeker, {
   start: 0,
   range: {
-    'min': 0,
-    'max': 100
+    min: 0,
+    max: 100
   }
 });
 
 noUiSlider.create(volumeGauge, {
   start: 40,
   range: {
-    'min': 0,
-    'max': 100
+    min: 0,
+    max: 100
   }
 });
 
-volumeGauge.noUiSlider.on("change", function(e) {
+seekBar.noUiSlider.on("slide", function(e) {
+  const _trimStart = parseFloat(e[0]);
+  const _trimEnd = parseFloat(e[1]);
+  const didTrimStartChange = _trimStart != trimStart;
+  const didTrimEndChange = _trimEnd != getTrimEnd();
+
+  if (!didTrimStartChange && !didTrimEndChange) {
+    return;
+  }
+
+  if (didTrimStartChange) {
+    trimStart = _trimStart;
+  }
+
+  setVideoDuration(_trimEnd - _trimStart);
+});
+
+volumeGauge.noUiSlider.on("slide", function(e) {
   const volume = e[0] / 100;
   currentVideo.volume = volume;
 });
 
-seeker.noUiSlider.on('change', function (e) {
-  const percentageInTime = videoDuration * (e[0] / 100);
-  currentVideo.currentTime = percentageInTime;
+seeker.noUiSlider.on("slide", function (e) {
+  currentVideo.currentTime = e[0];
 });
 
 playBtn.onclick = function(e) {
   e.stopPropagation();
+  const currentTime = currentVideo.currentTime;
+
+  if (currentTime < trimStart) {
+    seekVideoTo(trimStart);
+  } else if (currentTime > getTrimEnd()) {
+    seekVideoTo(getTrimEnd());
+  }
+
   currentVideo.play();
   playBtn.classList.add("d-none");
   pauseBtn.classList.remove("d-none");
@@ -198,7 +230,7 @@ pauseBtn.onclick = function(e) {
 currentVideo.onended = function() {
   pauseBtn.classList.add("d-none");
   playBtn.classList.remove("d-none");
-  seeker.noUiSlider.set(0);
+  seekVideoTo(trimStart);
 };
 
 fullScreenBtn.onclick = function(e) {
@@ -216,6 +248,50 @@ volumeBtn.onclick = function(e) {
 };
 
 currentVideo.ontimeupdate = function(e) {
-  const timeInPercentage = (e.target.currentTime / videoDuration) * 100;
-  seeker.noUiSlider.set(timeInPercentage);
+  const currentTime = e.target.currentTime;
+  const currentSeekPosition = parseFloat(seeker.noUiSlider.get());
+  const diff = Math.abs(currentTime - currentSeekPosition);
+  const hasVideoProgressedByStep = diff >= step
+
+  if (!hasVideoProgressedByStep) {
+    return;
+  }
+
+  seeker.noUiSlider.set(currentTime);
 };
+
+currentVideo.addEventListener('timeupdate', function(e) {
+  const currentTime = e.target.currentTime;
+  const hasCurrentTimePassedTrimEnd = currentTime > getTrimEnd();
+
+  if (!hasCurrentTimePassedTrimEnd) {
+    return
+  }
+
+  currentVideo.pause();
+  currentVideo.dispatchEvent(new Event('ended'));
+});
+
+function seekVideoTo(time) {
+  seeker.noUiSlider.set(time);
+  currentVideo.currentTime = time;
+}
+
+function getTrimEnd() {
+  return trimStart + videoDuration;
+}
+
+function setVideoDuration(duration) {
+  videoDuration = duration;
+  fduration.innerHTML = formatSecondsAsTime(duration);
+}
+
+function updateSliderStepAndRange(slider) {
+  slider.noUiSlider.updateOptions({
+    step: step,
+    range: {
+      min: 0,
+      max: videoDuration
+    }
+  })
+}
