@@ -135,9 +135,9 @@ DiskStorage.GetLastSelectedFile(recentFile, function (file) {
 });
 
 function formatSecondsAsTime(secs) {
-  var hr = Math.round(secs / 3600);
-  var min = Math.round((secs - hr * 3600) / 60);
-  var sec = Math.round(secs - hr * 3600 - min * 60);
+  var hr = secs > 3600 ? Math.round(secs % 3600) : 0;
+  var min = secs > 60 ? Math.round(secs % 60) : 0;
+  var sec = Math.round(secs - (min * 60));
 
   if (min < 10) {
     min = "0" + min;

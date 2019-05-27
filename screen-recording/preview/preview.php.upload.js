@@ -1,4 +1,4 @@
-var server_url = 'http://school.lvh.me:3000/api/tenant_admin/v1/videos/upload_and_create';
+var server_url = 'http://school.mujz.ca:3000/api/tenant_admin/v1/videos/upload_and_create';
 
 document.querySelector('#btn-upload').onclick = function() {
     if (!file) {
